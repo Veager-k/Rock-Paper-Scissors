@@ -26,23 +26,22 @@ function playRound(playerChoice, computerChoice){
 }
 
 function playerPlay(){
-    return prompt("What will you play?");
+    
 }
 
-function game(){
-    let Pscore = 0;
-    let Cscore = 0;
-    let gameRound = 0;
-    for(let i=0;i<5;i++){
-        let result = playRound(playerPlay(), computerPlay());
+function game(e){
+        let result = playRound(e.target.textContent, computerPlay());
         console.log(result);
-        if(result.slice(0, 6)==="You Wi") Pscore++;
-        else if(result.slice(0, 6)==="You Lo") Cscore++; 
-        gameRound++;        
-    }
-    if(Pscore>Cscore) console.log("You have won the game.");
-    else if(Cscore>Pscore) console.log("You have lost the game.");
-    else console.log("The game is a tie.");
+        //if(result.slice(0, 6)==="You Wi") Pscore++;
+        //else if(result.slice(0, 6)==="You Lo") Cscore++; 
+        //gameRound++;        
+    
 }
+
+const buttons = document.querySelectorAll(".button");
+buttons.forEach((button) => {
+    button.addEventListener("click", game)
+});
 
 game();
+
