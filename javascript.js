@@ -1,3 +1,9 @@
+const buttons = document.querySelectorAll(".button");
+const result_p = document.querySelector(".result");
+const scorePlayer = document.querySelector("#playerScoreNum");
+const scoreComp = document.querySelector("#computerScoreNum");
+const gameResult = document.querySelector(".gameResult");
+
 function computerPlay(){
     let randomNum = Math.random();
     if(randomNum>0.66) return "rock"
@@ -29,19 +35,30 @@ function playerPlay(){
     
 }
 
+let Pscore = 0;
+let Cscore = 0;
 function game(e){
+         gameResult.textContent = "";
         let result = playRound(e.target.textContent, computerPlay());
         console.log(result);
-        //if(result.slice(0, 6)==="You Wi") Pscore++;
-        //else if(result.slice(0, 6)==="You Lo") Cscore++; 
-        //gameRound++;        
-    
+        result_p.textContent = result;
+        if(result.slice(0, 6)==="You Wi") Pscore++;
+        else if(result.slice(0, 6)==="You Lo") Cscore++;         
+        scorePlayer.textContent = Pscore;
+        scoreComp.textContent = Cscore;
+        if(Pscore>=5){
+            gameResult.textContent = "You have outlucked the computer!";
+            Pscore = 0;
+            Cscore = 0;
+        }
+        else if(Cscore>=5){
+            gameResult.textContent = "Unsurprisingly the machine one again defeats the flesh bot!";
+            Pscore = 0;
+            Cscore = 0;
+        }
 }
 
-const buttons = document.querySelectorAll(".button");
 buttons.forEach((button) => {
     button.addEventListener("click", game)
 });
-
-game();
 
